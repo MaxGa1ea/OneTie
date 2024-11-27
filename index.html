@@ -1,0 +1,72 @@
+<DOCTYPEHTML>
+<html>
+    <head>
+        <style>
+            button:hover {
+                box-shadow: 2px 2px grey;
+            }
+            .active {
+                box-shadow: 2px 2px grey inset;
+            }
+        </style>
+    </head>
+    <body onload="loadsite()">
+        <canvas id="test-canvas" width="300" height="550"></canvas><br>
+        <div id="colourbox">
+
+        </div>
+        <script>
+            var canvas = document.getElementById("test-canvas");
+            var context = canvas.getContext('2d');
+
+            context.fillStyle = "AliceBlue";
+            context.beginPath();
+            context.moveTo(100, 0);
+            context.lineTo(250, 0);
+            context.lineTo(175, 150);
+            context.lineTo(50, 500);
+            context.lineTo(175, 550);
+            context.lineTo(300, 500);
+            context.lineTo(175, 150);
+            context.closePath();
+            context.fill();
+            localStorage.setItem("OldColour", "AliceBlue")
+
+            function myfunction(Colour) {
+                const element = document.getElementById(Colour);
+                element.classList.add("active");
+                document.getElementById(localStorage.getItem("OldColour")).classList.remove("active")
+                localStorage.setItem("OldColour", Colour)
+                var canvas = document.getElementById("test-canvas");
+                var context = canvas.getContext('2d');
+				        context.clearRect(0, 0, 300, 550)
+                context.fillStyle = document.getElementById(Colour).style.backgroundColor;
+                context.beginPath();
+                context.moveTo(100, 0);
+                context.lineTo(250, 0);
+                context.lineTo(175, 150);
+                context.lineTo(50, 500);
+                context.lineTo(175, 550);
+                context.lineTo(300, 500);
+                context.lineTo(175, 150);
+                context.closePath();
+                context.fill();
+            }
+
+            function loadsite() {
+                let x = 0
+                const Colours = [`AliceBlue`,`AntiqueWhite`,`Aqua`,`Aquamarine`,`Azure`,`Beige`,`Bisque`,`Black`,`BlanchedAlmond`,`Blue`,`BlueViolet`,`Brown`,`BurlyWood`,`CadetBlue`,`Chartreuse`,`Chocolate`,`Coral`,`CornflowerBlue`,`Cornsilk`,`Crimson`,`Cyan`, `DarkBlue`,`DarkCyan`,`DarkGoldenRod`,`DarkGray`,`DarkGrey`,`DarkGreen`,`DarkKhaki`,`DarkMagenta`,`DarkOliveGreen`,`Darkorange`,`DarkOrchid`,`DarkRed`,`DarkSalmon`,`DarkSeaGreen`,`DarkSlateBlue`,`DarkSlateGray`,`DarkSlateGrey`,`DarkTurquoise`,`DarkViolet`,`DeepPink`,`DeepSkyBlue`,`DimGray`,`DimGrey`,`DodgerBlue`,`FireBrick`,`FloralWhite`,`ForestGreen`,`Fuchsia`,`Gainsboro`,`GhostWhite`,`Gold`,`GoldenRod`,`Gray`,`Grey`,`Green`,`GreenYellow`,`HoneyDew`,`HotPink`,`IndianRed`,`Indigo`,`Ivory`,`Khaki`,`Lavender`,`LavenderBlush`,`LawnGreen`,`LemonChiffon`,`LightBlue`,`LightCoral`,`LightCyan`,`LightGoldenRodYellow`,`LightGray`,`LightGrey`,`LightGreen`,`LightPink`,`LightSalmon`,`LightSeaGreen`,`LightSkyBlue`,`LightSlateGray`,`LightSlateGrey`,`LightSteelBlue`,`LightYellow`,`Lime`,`LimeGreen`,`Linen`,`Magenta`,`Maroon`,`MediumAquaMarine`,`MediumBlue`,`MediumOrchid`,`MediumPurple`,`MediumSeaGreen`,`MediumSlateBlue`,`MediumSpringGreen`,`MediumTurquoise`,`MediumVioletRed`,`MidnightBlue`,`MintCream`,`MistyRose`,`Moccasin`,`NavajoWhite`,`Navy`,`OldLace`,`Olive`,`OliveDrab`,`Orange`,`OrangeRed`,`Orchid`,`PaleGoldenRod`,`PaleGreen`,`PaleTurquoise`,`PaleVioletRed`,`PapayaWhip`,`PeachPuff`,`Peru`,`Pink`,`Plum`,`PowderBlue`,`Purple`,`Red`,`RosyBrown`,`RoyalBlue`,`SaddleBrown`,`Salmon`,`SandyBrown`,`SeaGreen`,`SeaShell`,`Sienna`,`Silver`,`SkyBlue`,`SlateBlue`,`SlateGray`,`SlateGrey`,`Snow`,`SpringGreen`,`SteelBlue`,`Tan`,`Teal`,`Thistle`,`Tomato`,`Turquoise`,`Violet`,`Wheat`,`White`,`WhiteSmoke`,`Yellow`,`YellowGreen`,];
+                var Parent = document.getElementById("colourbox")
+                while (x != 147) {
+                    var object = document.createElement("button")
+                    object.style = "width: 50px; height: 50px; margin: 8px; background-color: " + Colours[x]
+                    object.id = Colours[x]
+                    object.setAttribute("onclick", "myfunction('"+Colours[x]+"')")
+                    Parent.appendChild(object)
+                    x++
+                }
+                document.getElementById("red").classList.add("active")
+            }
+        </script>
+    </body>
+</html>
